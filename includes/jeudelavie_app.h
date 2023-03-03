@@ -22,11 +22,12 @@ typedef struct Jeudelavie{
     SDL_Event event;
     bool** formation;
     bool** formation_buffer;
-    buttons_s buttons;
-    bool proceed_move;
-    bool request_update;
-    Etat actual_state;
-    Etat next_state;
+    buttons_s buttons;      // contains the buttons structures
+    bool proceed_move;      // to know that the user is watching the formation evolving
+    bool request_update;    // to update the screen after the user added/removed a square
+    Etat actual_state;      // for the FSM
+    Etat next_state;        // for the FSM 
+    bool new_cycle;
 }Jeudelavie_s;
 
 

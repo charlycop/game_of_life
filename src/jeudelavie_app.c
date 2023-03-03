@@ -41,6 +41,7 @@ void init_app(Jeudelavie_s* myGame){
     init_buttons(myGame->renderer, &myGame->buttons);
     myGame->proceed_move = false;
     myGame->request_update = true;
+    myGame->new_cycle = true;
 }
 
 void deinit_app(Jeudelavie_s* myGame){
@@ -53,18 +54,16 @@ void deinit_app(Jeudelavie_s* myGame){
 
 void start_button_handler(Jeudelavie_s* myGame){
 
-    static bool new_cycle = true;
-
-    if(new_cycle){
+    if(myGame->new_cycle){
         copy_array(myGame->formation, myGame->formation_buffer);
-        new_cycle = !new_cycle;
+        myGame->new_cycle = false;
     }
 
     prepare_next_formation(myGame->formation, myGame->formation_buffer);
     
     if(copy_array(myGame->formation_buffer, myGame->formation) == 0){
         myGame->proceed_move = false;
-        new_cycle = !new_cycle;
+        myGame->new_cycle = true;
     }
 }
 
@@ -98,6 +97,7 @@ static Etat check_events(Jeudelavie_s* myGame){
                         {
                             init_formations_buffers(&myGame->formation, &myGame->formation_buffer);
                             myGame->request_update = true;
+                            myGame->new_cycle = true;
                     }
                     else {
                             toggle_square(myGame->event.button.x, myGame->event.button.y, myGame->formation);
@@ -125,12 +125,10 @@ static void prepare_display(Jeudelavie_s* myGame){
     // Prepare buttons and new formation
     if (myGame->proceed_move){
         start_button_handler(myGame);
-        myGame->request_update = true;
         SDL_RenderCopy(myGame->renderer, myGame->buttons.button_textures[stop], NULL, &myGame->buttons.button_coords_size[stop]);
     }
     else{
         SDL_RenderCopy(myGame->renderer, myGame->buttons.button_textures[start], NULL, &myGame->buttons.button_coords_size[start]);
-
     }
 
     SDL_RenderCopy(myGame->renderer, myGame->buttons.button_textures[clear], NULL, &myGame->buttons.button_coords_size[clear]);
