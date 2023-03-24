@@ -90,14 +90,19 @@ void draw_formation(bool** formation, SDL_Renderer* renderer){
 static uint8_t check_around(uint16_t i, uint16_t j, bool ** formation){
     uint8_t nb_voisins = 0;
     
-    if (formation[i-1][j-1] == true) nb_voisins++;
-    if (formation[i-1][j+0] == true) nb_voisins++;
-    if (formation[i-1][j+1] == true) nb_voisins++;
-    if (formation[i+0][j-1] == true) nb_voisins++;
-    if (formation[i+0][j+1] == true) nb_voisins++;
-    if (formation[i+1][j-1] == true) nb_voisins++;
-    if (formation[i+1][j+0] == true) nb_voisins++;
-    if (formation[i+1][j+1] == true) nb_voisins++;
+    uint16_t i_minus_one = i-1,
+             i_plus_one  = i+1,
+             j_minus_one = j-1,
+             j_plus_one  = j+1;
+
+    if (formation[i_minus_one][j_minus_one] == true) nb_voisins++;
+    if (formation[i_minus_one][j]           == true) nb_voisins++;
+    if (formation[i_minus_one][j_plus_one]  == true) nb_voisins++;
+    if (formation[i][j_minus_one]           == true) nb_voisins++;
+    if (formation[i][j_plus_one]            == true) nb_voisins++;
+    if (formation[i_plus_one][j_minus_one]  == true) nb_voisins++;
+    if (formation[i_plus_one][j]            == true) nb_voisins++;
+    if (formation[i_plus_one][j_plus_one]   == true) nb_voisins++;
     
     return nb_voisins;
 }
