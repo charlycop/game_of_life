@@ -25,7 +25,7 @@ static void init_SDL(SDL_Renderer** renderer_ptr, SDL_Window** window_ptr){
     SDL_SetRenderDrawColor(*renderer_ptr, COLOR_WHITE);
     SDL_RenderClear(*renderer_ptr);
 
-    SDL_SetRenderDrawColor(*renderer_ptr, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(*renderer_ptr, COLOR_BLACK);
     for (i = 0; i <= GRID_WIDTH; i++) {
         SDL_RenderDrawLine(*renderer_ptr, i * GRID_SIZE, 0, i * GRID_SIZE, SCREEN_HEIGHT);
     }

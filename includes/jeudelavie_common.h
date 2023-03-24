@@ -12,6 +12,7 @@
 #define GRID_HEIGHT SCREEN_HEIGHT / GRID_SIZE
 #define COLOR_RED   255, 0, 0, 255
 #define COLOR_WHITE 255, 255, 255, 255
+#define COLOR_BLACK 0, 0, 0, 255
 #define DEFINE_RECT(line, col, var) \
                 var.y = GRID_SIZE*line + 1; \
                 var.x = GRID_SIZE*col + 1; \
